@@ -1,4 +1,4 @@
-# Go Template
+# Claude Code DevContainer Template
 
 > "I'm sorry Claude, I'm afraid I can't do that"
 >
@@ -8,11 +8,11 @@ A minimal environment template for running Claude Code in containment
 
 ## Features
 
-- Simple Go HTTP server with "Hello World" endpoint
-- PostgreSQL database connection example
-- DevContainer setup for consistent development environment
-- Docker Compose configuration for PostgreSQL
-- Claude Code CLI pre-installed for AI-assisted development
+-   Simple Go HTTP server with "Hello World" endpoint
+-   PostgreSQL database connection example
+-   DevContainer setup for consistent development environment
+-   Docker Compose configuration for PostgreSQL
+-   Claude Code CLI pre-installed for AI-assisted development
 
 ## Quick Start
 
@@ -21,25 +21,27 @@ A minimal environment template for running Claude Code in containment
 1. Open in VS Code with Remote-Containers extension
 2. VS Code will automatically build and start the development environment
 3. Claude Code CLI is available for AI-assisted development:
-   ```bash
-   claude-code --help
-   ```
+    ```bash
+    claude-code --help
+    ```
 4. Run the application:
-   ```bash
-   go run main.go
-   ```
+    ```bash
+    go run main.go
+    ```
 
 ### Manual Setup
 
 1. Start PostgreSQL:
-   ```bash
-   docker-compose -f .devcontainer/docker-compose.devcontainer.yml up postgres -d
-   ```
+
+    ```bash
+    docker-compose -f .devcontainer/docker-compose.devcontainer.yml up postgres -d
+    ```
 
 2. Run the Go application:
-   ```bash
-   go run main.go
-   ```
+
+    ```bash
+    go run main.go
+    ```
 
 3. Visit http://localhost:8080 to see "Hello World!"
 
@@ -58,8 +60,8 @@ go-template/
 
 ## Environment Variables
 
-- `DATABASE_URL`: PostgreSQL connection string (default: `postgres://postgres@localhost:5432/postgres?sslmode=disable`)
-- `PORT`: HTTP server port (default: `8080`)
+-   `DATABASE_URL`: PostgreSQL connection string (default: `postgres://postgres@localhost:5432/postgres?sslmode=disable`)
+-   `PORT`: HTTP server port (default: `8080`)
 
 ## Database Connection
 
@@ -69,12 +71,12 @@ The application includes a basic PostgreSQL connection example. When running in 
 
 This template provides a minimal foundation. You can extend it by:
 
-- Adding more HTTP handlers
-- Implementing database models and queries
-- Adding authentication and authorization
-- Including testing framework
-- Adding configuration management
-- Implementing logging and monitoring
+-   Adding more HTTP handlers
+-   Implementing database models and queries
+-   Adding authentication and authorization
+-   Including testing framework
+-   Adding configuration management
+-   Implementing logging and monitoring
 
 ## License
 
