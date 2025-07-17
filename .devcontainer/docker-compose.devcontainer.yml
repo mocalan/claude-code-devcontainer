@@ -1,0 +1,38 @@
+services:
+    postgres:
+        image: postgres:15-alpine
+        environment:
+            POSTGRES_DB: postgres
+            POSTGRES_USER: postgres
+            POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+            - '5432:5432'
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+
+    devcontainer:
+        build:
+            context: ..
+            dockerfile: .devcontainer/Dockerfile
+        volumes:
+            - ..:/workspace:cached
+            - go-template-go-mod:/go/pkg/mod
+            - go-template-vscode:/home/vscode/.vscode-server
+        working_dir: /workspace
+        command: sleep infinity
+        environment:
+            - GOPATH=/go
+            - GOPROXY=https://proxy.golang.org,direct
+            - GOSUMDB=sum.golang.org
+            - CGO_ENABLED=1
+            - DATABASE_URL=postgres://postgres@postgres:5432/postgres?sslmode=disable
+            - PATH=/usr/local/go/bin:/go/bin:/usr/local/bin:/usr/bin:/bin
+        ports:
+            - '8080:8080'
+        depends_on:
+            - postgres
+
+volumes:
+    postgres_data:
+    go-template-go-mod:
+    go-template-vscode:

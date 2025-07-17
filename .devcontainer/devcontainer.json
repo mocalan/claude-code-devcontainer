@@ -1,0 +1,56 @@
+{
+    "name": "Go Template Development Environment",
+    "dockerComposeFile": ["docker-compose.devcontainer.yml"],
+    "service": "devcontainer",
+    "workspaceFolder": "/workspace",
+    "shutdownAction": "stopCompose",
+
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "go.useLanguageServer": true,
+                "go.gopath": "/go",
+                "go.goroot": "/usr/local/go",
+                "editor.formatOnSave": true,
+                "editor.tabSize": 4,
+                "editor.insertSpaces": false,
+                "files.trimTrailingWhitespace": true,
+                "files.insertFinalNewline": true
+            },
+
+            "extensions": [
+                "golang.go",
+                "ms-azuretools.vscode-docker",
+                "anthropic.claude-code"
+            ]
+        }
+    },
+
+    "forwardPorts": [8080, 5432],
+    "portsAttributes": {
+        "8080": {
+            "label": "Go Application",
+            "onAutoForward": "notify"
+        },
+        "5432": {
+            "label": "PostgreSQL Database",
+            "onAutoForward": "silent"
+        }
+    },
+
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+        "source=go-template-go-mod,target=/go/pkg/mod,type=volume"
+    ],
+
+    "remoteEnv": {
+        "GOPATH": "/go",
+        "GOPROXY": "https://proxy.golang.org,direct",
+        "GOSUMDB": "sum.golang.org",
+        "CGO_ENABLED": "1",
+        "PATH": "/usr/local/go/bin:/go/bin:${containerEnv:PATH}",
+        "DATABASE_URL": "postgres://postgres@postgres:5432/postgres?sslmode=disable"
+    },
+
+    "remoteUser": "vscode"
+}
